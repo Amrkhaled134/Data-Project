@@ -175,7 +175,7 @@ plt.show()
 
 ### Results
 ---------------
-![Trending Top Skills for Data Analysts in the US](Images/Trending Top Skills for Data Analysts in the US.png)  
+![Trending Top Skills for Data Analysts in the US](Images/Trending_Top_Skills.png)  
 *Bar graph visualizing the trending top skills for data analysts in the US in 2023.*
 
 ### Insights:
@@ -192,8 +192,14 @@ View my notebook with detailed steps here: [4_Salary_Analysis](4_Salary_analysis
 #### Visualize Data 
 
 ```python
-sns.boxplot(data=df_US_top6, x='salary_year_avg', y='job_title_short', order=job_order)
+sns.set_theme(style='ticks')
+sns.boxplot(df_US_6,x='salary_year_avg',y='job_title_short',order=jobs_order)
+sns.despine()
 
+plt.title('Salary Distributions of Data Jobs in the US')
+plt.xlabel('Yearly Salary (USD)')
+plt.ylabel('')
+plt.xlim(0, 600000) 
 ticks_x = plt.FuncFormatter(lambda y, pos: f'${int(y/1000)}K')
 plt.gca().xaxis.set_major_formatter(ticks_x)
 plt.show()
@@ -202,7 +208,7 @@ plt.show()
 
 #### Results
 
-![Salary Distributions of Data Jobs in the US](images/Salary_Distributions_of_Data_Jobs_in_the_US.png)  
+![Salary Distributions of Data Jobs in the US](images/Salary_Distributions.png)  
 *Box plot visualizing the salary distributions for the top 6 data job titles.*
 
 #### Insights
