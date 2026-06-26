@@ -208,7 +208,7 @@ plt.show()
 
 #### Results
 
-![Salary Distributions of Data Jobs in the US](images/Salary_Distributions.png)  
+![Salary Distributions of Data Jobs in the US](Images/Salary_Distributions.png)  
 *Box plot visualizing the salary distributions for the top 6 data job titles.*
 
 #### Insights
@@ -228,13 +228,24 @@ Next, I narrowed my analysis and focused only on data analyst roles. I looked at
 ```python
 
 fig, ax = plt.subplots(2, 1)  
+sns.set_theme(style='ticks')
+sns.barplot(df_DA_top_pay,x='median',y=df_DA_top_pay.index,ax=ax[0],hue='median',palette='crest')
+ax[0].legend().set_visible(False)
+ax[0].set_title('Top 10 Highest Paid Skills for Data Analysts')
+ax[0].set_ylabel('')
+ax[0].set_xlabel('')
+ax[0].xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
 
-# Top 10 Highest Paid Skills for Data Analysts
-sns.barplot(data=df_DA_top_pay, x='median', y=df_DA_top_pay.index, hue='median', ax=ax[0], palette='dark:b_r')
 
-# Top 10 Most In-Demand Skills for Data Analystsr')
-sns.barplot(data=df_DA_skills, x='median', y=df_DA_skills.index, hue='median', ax=ax[1], palette='light:b')
+sns.barplot(df_DA_skills,x='median',y=df_DA_skills.index,ax=ax[1],hue='median',palette='crest')
+ax[1].legend().set_visible(False)
+ax[1].set_title('Top 10 Most In-Demand Skills for Data Analysts')
+ax[1].set_ylabel('')
+ax[1].set_xlabel('Median Salary (USD)')
+ax[1].set_xlim(ax[0].get_xlim())  
+ax[1].xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
 
+plt.tight_layout()
 plt.show()
 
 ```
@@ -242,7 +253,7 @@ plt.show()
 #### Results
 Here's the breakdown of the highest-paid & most in-demand skills for data analysts in the US:
 
-![The Highest Paid & Most In-Demand Skills for Data Analysts in the US](images/Highest_Paid_and_Most_In_Demand_Skills_for_Data_Analysts_in_the_US.png)
+![The Highest Paid & Most In-Demand Skills for Data Analysts in the US](Images/Top_10.png)
 *Two separate bar graphs visualizing the highest paid skills and most in-demand skills for data analysts in the US.*
 
 #### Insights:
@@ -257,22 +268,37 @@ Here's the breakdown of the highest-paid & most in-demand skills for data analys
 
 To identify the most optimal skills to learn ( the ones that are the highest paid and highest in demand) I calculated the percent of skill demand and the median salary of these skills. To easily identify which are the most optimal skills to learn. 
 
-View my notebook with detailed steps here: [5_Optimal_Skills](5_Optimal_Skills.ipynb).
+View my notebook with detailed steps here: [5_Optimal_Skills](5_Optimal_skills.ipynb).
 
 #### Visualize Data
 
 ```python
-from adjustText import adjust_text
-import matplotlib.pyplot as plt
 
-plt.scatter(df_DA_skills_high_demand['skill_percent'], df_DA_skills_high_demand['median_salary'])
+from adjustText import adjust_text
+from matplotlib.ticker import PercentFormatter
+df_grouped_high_demand.plot(kind='scatter', x='skill_percent', y='median_salary')
+texts = []
+for i, txt in enumerate(df_grouped_high_demand.index):
+    texts.append(plt.text(df_grouped_high_demand['skill_percent'].iloc[i], df_grouped_high_demand['median_salary'].iloc[i], txt))
+adjust_text(texts, arrowprops=dict(arrowstyle='->', color='gray'))
+
+plt.xlabel('Percent of Data Analyst Jobs')
+plt.ylabel('Median Yearly Salary')
+plt.title(f'Optimal Skills for Data Analyst in US')
+
+
+ax = plt.gca()
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, pos: f'${int(y/1000)}K'))  # Example formatting y-axis
+ax.xaxis.set_major_formatter(PercentFormatter(decimals=0))
+# Adjust layout and display the plot
+plt.tight_layout()
 plt.show()
 
 ```
 
 #### Results
 
-![Most Optimal Skills for Data Analysts in the US](images/Most_Optimal_Skills_for_Data_Analysts_in_the_US.png)    
+![Most Optimal Skills for Data Analysts in the US](Images/Optimal_Skills.png)    
 *A scatter plot visualizing the most optimal skills (high paying & high demand) for data analysts in the US.*
 
 #### Insights:
@@ -290,24 +316,37 @@ Let's visualize the different technologies as well in the graph. We'll add color
 #### Visualize Data
 
 ```python
-from matplotlib.ticker import PercentFormatter
+sns.set_theme(style='ticks')
+sns.scatterplot(df_plot,
+                x='skill_percent',
+                y='median_salary',
+                hue='technology'
+                )
 
-# Create a scatter plot
-scatter = sns.scatterplot(
-    data=df_DA_skills_tech_high_demand,
-    x='skill_percent',
-    y='median_salary',
-    hue='technology',  # Color by technology
-    palette='bright',  # Use a bright palette for distinct colors
-    legend='full'  # Ensure the legend is shown
-)
+texts = []
+for i, txt in enumerate(df_plot['skills']):
+    texts.append(plt.text(df_plot['skill_percent'].iloc[i], df_plot['median_salary'].iloc[i], txt))
+adjust_text(texts, arrowprops=dict(arrowstyle='->', color='gray'))
+
+sns.despine()
+
+plt.xlabel('Percent of Data Analyst Jobs')
+plt.ylabel('Median Yearly Salary')
+plt.title(f'Optimal Skills for Data Analyst in US')
+
+
+ax = plt.gca()
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, pos: f'${int(y/1000)}K'))  # Example formatting y-axis
+ax.xaxis.set_major_formatter(PercentFormatter(decimals=0))
+# Adjust layout and display the plot
+plt.tight_layout()
 plt.show()
 
 ```
 
 #### Results
 
-![Most Optimal Skills for Data Analysts in the US with Coloring by Technology](images/Most_Optimal_Skills_for_Data_Analysts_in_the_US_with_Coloring_by_Technology.png)  
+![Most Optimal Skills for Data Analysts in the US with Coloring by Technology](Images/Optimal_Skills_Edited.png)  
 *A scatter plot visualizing the most optimal skills (high paying & high demand) for data analysts in the US with color labels for technology.*
 
 #### Insights:
