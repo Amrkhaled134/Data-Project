@@ -117,4 +117,5 @@ fig.tight_layout()
 '''
 
 ### Results
-![Likelihood of Skills Requested in US Job Postings]("C:\Users\SAMA\Documents\Project_Data\Likelihood of Skills Requested in US Job Postings.png")
+![Likelihood of Skills Requested in US Job Postings](images/Likelihood of Skills Requested in US Job Postings)
+
