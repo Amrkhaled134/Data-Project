@@ -74,3 +74,47 @@ To find the most demanded skills for the top 3 most popular data roles. I filter
 
 View my notebook with detailed steps here: [2_Skill_Demand](2_Skills_demand.ipynb).
 
+### Visualize Data
+
+```python
+fig,ax=plt.subplots(len(jobs),1)
+sns.set_theme(style='ticks')
+for i, job_title in enumerate(jobs):
+
+    df_plot = df_joined[df_joined['job_title_short'] == job_title].head().copy()
+    
+    sns.barplot(df_plot,
+                x='skill_percent',
+                y='job_skills',
+                hue='skill_percent',
+                palette='crest',
+                ax=ax[i],
+                legend=False)
+
+        # Add percentage labels
+    for p in ax[i].patches:
+        ax[i].annotate(
+            f'{p.get_width():.0f}%',
+            (p.get_width(), p.get_y() + p.get_height()/2),
+            xytext=(5, 0),
+            textcoords='offset points',
+            ha='left',
+            va='center',
+            fontsize=10
+        )
+
+    if i!=len(jobs)-1:
+        ax[i].set_xticks([])
+        
+    
+    ax[i].set_title(job_title,fontsize=14)
+    ax[i].set_ylabel('')
+    ax[i].set_xlabel('')
+    ax[i].set_xlim(0,80)
+
+fig.suptitle(f'Likelihood of Skills Requested in US Job Postings',fontsize=17)    
+fig.tight_layout()
+'''
+
+### Results
+![Likelihood of Skills Requested in US Job Postings](images/Likelihood of Skills Requested in US Job Postings)
