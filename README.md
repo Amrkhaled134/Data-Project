@@ -117,7 +117,7 @@ fig.tight_layout()
 '''
 
 ### Results
-![Likelihood of Skills Requested in US Job Postings](Images/Likelihood_of_Skills_Requested_in_US_Job_Postings.png)
+![Likelihood of Skills Requested in US Job Postings]([Images/Likelihood_of_Skills_Requested_in_US_Job_Postings.png](https://github.com/Amrkhaled134/Data-Project/blob/main/Images/Likelihood_of_Skills_Requested_in_US_Job_Postings.png))
 
 
 *Bar graph visualizing the salary for the top 3 data roles and their top 5 skills associated with each.*
