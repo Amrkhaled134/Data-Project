@@ -44,6 +44,33 @@ import matplotlib.pyplot as plt
 df = pd.read_csv(r"C:\Users\SAMA\Downloads\data_jobs.csv")
 
 # Data Cleanup
-df['job_posted_date'] = pd.to_datetime(df['job_posted_date'])
-df['job_skills'] = df['job_skills'].apply(lambda x: ast.literal_eval(x) if pd.notna(x) else x)
+def clean(skills):
+    
+    if pd.notna(skills):
+        
+        return ast.literal_eval(skills)
+    
+    else :
+        
+        return skills
+    
+df['job_skills']=df['job_skills'].apply(clean)  
 ```
+## Filter US Jobs
+
+To focus my analysis on the U.S. job market, I apply filters to the dataset, narrowing down to roles based in the United States.
+
+```python
+df_US = df[df['job_country'] == 'United States']
+
+```
+# The Analysis
+
+Each Jupyter notebook for this project aimed at investigating specific aspects of the data job market. Here’s how I approached each question:
+
+## 1. What are the most demanded skills for the top 3 most popular data roles?
+
+To find the most demanded skills for the top 3 most popular data roles. I filtered out those positions by which ones were the most popular, and got the top 5 skills for these top 3 roles. This query highlights the most popular job titles and their top skills, showing which skills I should pay attention to depending on the role I'm targeting. 
+
+View my notebook with detailed steps here: [2_Skill_Demand](2_Skill_Demand.ipynb).
+
