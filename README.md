@@ -117,5 +117,5 @@ fig.tight_layout()
 '''
 
 ### Results
-![Likelihood of Skills Requested in US Job Postings](Images\Likelihood_of_Skills_Requested_in_US_Job_Postings.png")
+![Likelihood of Skills Requested in US Job Postings](Images\Likelihood_of_Skills_Requested_in_US_Job_Postings.png)
 
