@@ -120,7 +120,7 @@ fig.tight_layout()
 
 ### Results
 
-![Likelihood of Skills Requested in the US Job Postings](Images/Likelihood_of_Skills_Requested_in_US_Job_Postings)
+![Likelihood of Skills Requested in the US Job Postings](Images/Likelihood_of_Skills_Requested_in_US_Job_Postings.png)
 
 *Bar graph visualizing the salary for the top 3 data roles and their top 5 skills associated with each.*
 
@@ -175,7 +175,7 @@ plt.show()
 
 ### Results
 ---------------
-![Trending Top Skills for Data Analysts in the US](images/Trending_Top_Skills_for_Data_Analysts_in_the_US.png)  
+![Trending Top Skills for Data Analysts in the US](Images/Trending Top Skills for Data Analysts in the US.png)  
 *Bar graph visualizing the trending top skills for data analysts in the US in 2023.*
 
 ### Insights:
@@ -187,7 +187,7 @@ plt.show()
 
 To identify the highest-paying roles and skills, I only got jobs in the United States and looked at their median salary. But first I looked at the salary distributions of common data jobs like Data Scientist, Data Engineer, and Data Analyst, to get an idea of which jobs are paid the most. 
 
-View my notebook with detailed steps here: [4_Salary_Analysis](4_Salary_Analysis.ipynb).
+View my notebook with detailed steps here: [4_Salary_Analysis](4_Salary_analysis.ipynb).
 
 #### Visualize Data 
 
